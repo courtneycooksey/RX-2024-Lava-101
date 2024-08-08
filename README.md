@@ -56,7 +56,7 @@ Depending on your version of Rock and block context `Person` could also be avail
 
 ## The Assign Tag
 
-```html
+```liquid
 {% assign myVariable = 'The first value' %}
 myVariable is {{ myVariable }}
 <br/>
@@ -66,32 +66,32 @@ myVariable has been changed to {{ myVariable }}
 
 ## Types Of Values You Can Assign To Your Custom Variables
 
-```html
+```liquid
 {% assign myString = 'This is a string.' %}
 ```
 
-```html
+```liquid
 {% assign myNumber = 7 %}
 ```
 
-```html
+```liquid
 {% assign myBool = true %}
 ```
 
-```html
+```liquid
 {% assign myDate = '2024-01-01 06:00:00' | Date:'yyyy-MM-dd HH:mm:ss' %}
 ```
 
 ## The Capture Tag
 
-```html
+```liquid
 {% capture greeting %}Hello, {{CurrentPerson.NickName}}{% endcapture %}
 {{ greeting }}
 ```
 
 ## If Is a Tag That Allows for Conditional Logic
 
-```html
+```liquid
 {% if CurrentPerson.LastName == 'Decker' %}
     ...This is only run when last name is Decker...
 {% endif %}
@@ -99,7 +99,7 @@ myVariable has been changed to {{ myVariable }}
 
 ## Using Comparison Operators
 
-```html
+```liquid
 {% if CurrentPerson.LastName == 'Decker' %}
     ...Prints when the logged in user's last name is Decker...
 {% endif %}
@@ -118,17 +118,17 @@ myVariable has been changed to {{ myVariable }}
 
 ## You Can Have Multiple Conditions
 
-```html
+```liquid
 {% if Person.LastName == 'Decker' and Person.FirstName == 'Ted' %}
 ```
 
-```html
+```liquid
 {% if Person.LastName == 'Decker' or Person.LastName == 'Marbles' %}
 ```
 
 ## Stacking Conditions
 
-```html
+```liquid
 {% if CurrentPerson.LastName == 'Decker' and CurrentPerson.FirstName == 'Ted' %}
     ...Prints when the logged in user's name is Ted Decker...
 {% endif %}
@@ -140,7 +140,7 @@ myVariable has been changed to {{ myVariable }}
 
 ## The Else Tag Can Be Used to Extend the If Tag
 
-```html
+```liquid
 {% if CurrentPerson.LastName == 'Decker' %}
     Hello Decker Family!
 {% else %}
@@ -148,9 +148,9 @@ myVariable has been changed to {{ myVariable }}
 {% endif %}
 ```
 
-## The Elseif Tag 
+## The Elseif Tag
 
-```html
+```liquid
 {% if CurrentPerson.LastName == 'Decker' %}
     Hi Decker Family!
 {% elseif CurrentPerson.LastName == 'Marbles' %}
@@ -162,7 +162,7 @@ myVariable has been changed to {{ myVariable }}
 
 ## If Blocks Will Stop Processing as Soon as a Condition is Met
 
-```html
+```liquid
 {% if CurrentPerson.LastName == 'Decker' %}
     Hi Decker Family!
 {% elseif CurrentPerson.NickName == 'Ted' %}
@@ -174,7 +174,7 @@ myVariable has been changed to {{ myVariable }}
 
 ## A For Loop is Used to Repeat a Section of Logic for Many Items
 
-```html
+```liquid
 {% for currentGroupMembership in CurrentPerson.Members %}
     {{ currentGroupMembership.Group.Name }} <br/>
 {% endfor %}
@@ -182,7 +182,7 @@ myVariable has been changed to {{ myVariable }}
 
 ## Additional Parameters Will Go in the Opening Tag of the For Loop
 
-```html
+```liquid
 {% for currentGroupMembership in CurrentPerson.Members limit:3 %}
     {{ currentGroupMembership.Group.Name }} <br/>
 {% endfor %}
@@ -210,20 +210,20 @@ myVariable has been changed to {{ myVariable }}
 
 ## Filter Syntax
 
-```markdown
+```liquid
 {{ CurrentPerson | Attribute:'Allergy' }}
 ```
 
 ## Get a Subset of a List with the Where Filter
 
-```html
+```liquid
 {% assign activeMemberships = CurrentPerson.Members | Where:'GroupMemberStatus','Active' %}
 {{ activeMemberships | Size }}
 ```
 
 ## Use the Select Filter to Transform the Entity Type
 
-```html
+```liquid
 {% assign activeMemberships = CurrentPerson.Members | Where:'GroupMemberStatus','Active' %}
 {% assign activeGroups = activeMemberships | Select:'Group' | Where:'IsActive',true %}
 {{ activeGroups | Size }}
@@ -231,7 +231,7 @@ myVariable has been changed to {{ myVariable }}
 
 ## Transform the List of Groups to Their Group Types and Then Purposes
 
-```html
+```liquid
 {% assign activeMemberships = CurrentPerson.Members | Where:'GroupMemberStatus','Active' %}
 {% assign activeGroups = activeMemberships | Select:'Group' | Where:'IsActive',true %}
 {% assign groupPurposes = activeGroups | Select:'GroupType' | Select:'GroupTypePurposeValue' %}
@@ -241,7 +241,7 @@ myVariable has been changed to {{ myVariable }}
 
 ## Filters Can be Chained Together
 
-```html
+```liquid
 {% assign numberOfServingTeams = CurrentPerson.Members | Where:'GroupMemberStatus','Active' | Select:'Group' | Where:'IsActive', true | Select:'GroupType' | Select:'GroupTypePurposeValue' | Where:'Value','Serving Area' | Size %}
 {% if numberOfServingTeams > 0 %}
     Thank you for serving in our church!
@@ -252,7 +252,7 @@ myVariable has been changed to {{ myVariable }}
 
 ## The ToJSON Filter Turns Entities into a Readable Format of Key Value Pairs
 
-```html
+```liquid
 {{ CurrentPerson.Members | First | ToJSON }}
 ```
 
@@ -319,7 +319,7 @@ myVariable has been changed to {{ myVariable }}
 }
 ```
 
-```html
+```liquid
 {{ CurrentPerson.ConnectionStatusValue.Value }}
 ```
 
@@ -341,31 +341,31 @@ myVariable has been changed to {{ myVariable }}
 
 ## Entity Attributes Can be Accessed With the Attribute Filter
 
-```html
+```liquid
 {{ Person.AttributeValues | Where:'AttributeId',740 | First | Property:'Value' }}
 ```
 
-```html
+```liquid
 {{ CurrentPerson | Attribute:'Allergy' }}
 ```
 
 ## Some Other Filters
 
-```html
+```liquid
 {{ 'Now' | Date | DateAdd:7 | Date:'MM/dd/yy' }}
 ```
 
-```html
+```liquid
 {{ CurrentPerson | Group:'2','Active' }}
 ```
 
-```html
+```liquid
 {{ CurrentPerson | NearestCampus | Property:'Name' }}
 ```
 
 ## Retrieve Data with the Entity Command
 
-```html
+```liquid
 {% groupmember %}
 
 {% endgroupmember %}
@@ -373,7 +373,7 @@ myVariable has been changed to {{ myVariable }}
 
 ## Provide Information About the Desired Data with Parameters
 
-```html
+```liquid
 {% groupmember id:'1' %}
 {% endgroupmember %}
 
@@ -386,13 +386,13 @@ myVariable has been changed to {{ myVariable }}
 
 ## Using the Entity Data
 
-```html
+```liquid
 {% groupmember id:'1' %}
     {{ groupmember.Person.FirstName }}
 {% endgroupmember %}
 ```
 
-```html
+```liquid
 {% groupmember ids:'1,2,3' %}
     {{ groupmemberItems[0].Person.FirstName }}
 {% endgroupmember %}
@@ -405,7 +405,7 @@ myVariable has been changed to {{ myVariable }}
 
 ## The Personalize Command Allows for Dynamic Content
 
-```html
+```liquid
 {% personalize segment:'SegmentKey' requestfilter:'FilterKey' matchtype:'all' %}
   Content for people in this segment!
 {% otherwise %}
