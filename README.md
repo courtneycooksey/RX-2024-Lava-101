@@ -1,7 +1,7 @@
 # RX2024 Lava 101
-[Slide Deck]()
+[Slide Deck](https://github.com/courtneycooksey/RX-2024-Lava-101/blob/main/RX%202024%20Lava%20101.pdf)
 
-[Takeaway]()
+[Takeaway](https://github.com/courtneycooksey/RX-2024-Lava-101/blob/main/Lava%20101%20Takeaway.pdf)
 
 Below are the code snippets from the slides arranged by slide title. Github allows for an easy copy of each snippet to make it easier to follow along.
 
